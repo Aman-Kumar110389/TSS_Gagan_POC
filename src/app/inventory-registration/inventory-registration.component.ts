@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { Inventoryobj } from '../Interface/Inventory/Inventory';
+import { Inventoryobj} from '../Interface/Inventory/Inventory';
+import { Category } from '../Interface/Inventory/Category';
 
 @Component({
   selector: 'app-inventory-registration',
@@ -10,13 +11,8 @@ import { Inventoryobj } from '../Interface/Inventory/Inventory';
 })
 export class InventoryRegistrationComponent implements OnInit {
 
-  Categories = [
-    "Raw Material",
-    "Work in Progress",
-    "Buffer Inventory",
-    "Finished Goods",
-  ]
-  
+categories: Category[] =	[];
+
   public Records : any;
   data : any;
   Inventoryobj: Inventoryobj;
@@ -28,11 +24,12 @@ export class InventoryRegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   this.route.queryParams.subscribe((params)=>{
-     console.log(params);
-      this.data =JSON.parse(params['data']);
-  })
-}
+    var localStorageCategories = localStorage.getItem('Categories');
+    if(localStorageCategories!=null){
+      this.categories = JSON.parse(localStorageCategories);
+     // TO Do
+    }
+    }
 
   getnewInventoryID(){
     debugger;
