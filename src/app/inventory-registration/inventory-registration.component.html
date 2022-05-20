@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-header">inventory Registration    <b> Maximum 10 inventories are allowed. </b></div>
+     <div class="card-body">
+        <div class="container">
+          <form action="/action_page.php" class="was-validated">
+               <div class="col-xs-8">
+                <label for="id">ID:</label>
+                <input type="number" class="form-control"  [(ngModel)]="Inventoryobj.id" placeholder="Enter ID" name="ID" required="true">
+                <div class="invalid-feedback">Please fill out this field.</div> 
+              </div>
+              
+              <div class="col-xs-8">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control"  [(ngModel)]="Inventoryobj.Name" placeholder="Enter name" name="name" required="true">
+                <div class="invalid-feedback">Please fill out this field.</div>              
+              </div>
+             <div class="col-xs-8">
+                <label for="Category">Category:</label>
+                
+                <select class="form-control" [(ngModel)]="Inventoryobj.categoryId" placeholder="Select Category" name="Category" required="true">
+                  
+                    {{data.Category}}
+              
+                </select>
+                <div class="invalid-feedback">Please select a Category</div>
+                </div>
+              <div class="col-xs-8">
+                <label for="Quantity">Quantity:</label>
+                <input type="text" class="form-control" [(ngModel)]="Inventoryobj.Quantity" placeholder="Enter Quantity" name="Quantity" required>
+                <div class="invalid-feedback">Enter Quantity</div>
+              </div>
+              <div class="col-xs-8">  
+                <label for="Dateofpurchase">Date:</label>
+                <input type="datetime-local" class="form-control" [(ngModel)]="Inventoryobj.dateofPurchase" placeholder="Enter Date" name="Date" required="true">
+                <div class="invalid-feedback">Enter Date </div>
+              </div>
+              <br> <br> 
+              <button type="submit" (click)="saveInventories()" class="btn btn-success">Submit</button>
+            </form>
+         </div>
+    </div>
+</div>

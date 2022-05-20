@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="card-header">Inventory List</div>
+    <div class="card-body">
+        <table class="table table-primary">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Dateofpurchase</th>
+              </tr>
+            </thead>
+            <tbody>
+             <tr *ngFor = "let items of Inventory; let i = index">
+             <td>{{i+1}}</td>
+             <td>{{items.Name}}</td>
+             <td>{{items.categoryId}}</td>
+             <td>{{items.Quantity}}</td>
+             <td>{{items.dateofPurchase}}</td>
+            <td>
+                <button class ="btn btn-sm btn-success">Edit</button>
+                <button class ="btn btn-sm btn-success">Delete</button>
+            </td> 
+            </tr>
+            </tbody>
+          </table>
+    </div> 
+  </div>
