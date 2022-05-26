@@ -15,7 +15,7 @@ export class CategoryComponent implements OnInit {
   Submitted = false;
   public Records : any;
   Category: Category ;
-
+  
   constructor( )
   {
     this.Category = new Category(); 
@@ -39,7 +39,7 @@ export class CategoryComponent implements OnInit {
   this.Records = localStorage.getItem('Category');
   if(this.Records !== null){
   const Category = JSON.parse(this.Records);
-  return Category.maxlength = 2;
+  return Category.length + 1 ;
   }
  
 }
