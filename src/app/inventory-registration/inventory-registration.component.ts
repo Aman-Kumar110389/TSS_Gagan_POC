@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { SlicePipe } from '@angular/common';
+import { Component, createNgModuleRef, OnInit } from '@angular/core';
+import { Category } from '../Interface/Inventory/Category';
+import { Inventoryobj} from '../Interface/Inventory/Inventory';
 
-import { Inventoryobj } from '../Interface/Inventory/Inventory';
 
 @Component({
   selector: 'app-inventory-registration',
@@ -10,32 +11,30 @@ import { Inventoryobj } from '../Interface/Inventory/Inventory';
 })
 export class InventoryRegistrationComponent implements OnInit {
 
-  Categories = [
-    "Raw Material",
-    "Work in Progress",
-    "Buffer Inventory",
-    "Finished Goods",
-  ]
-  
   public Records : any;
   data : any;
   Inventoryobj: Inventoryobj;
+  category: any;
+  categories : Category[]=[];
+  
   constructor(
-    private router :Router,
-    private route : ActivatedRoute
   ) { 
     this.Inventoryobj = new Inventoryobj();
+
   }
-
+     
   ngOnInit(): void {
-   this.route.queryParams.subscribe((params)=>{
-     console.log(params);
-      this.data =JSON.parse(params['data']);
-  })
-}
-
-  getnewInventoryID(){
     debugger;
+    var localStorageCategories = localStorage.getItem('Category');
+    if(localStorageCategories!=null){
+      let category = JSON.parse(localStorageCategories);
+      this.categories = category;
+      
+      
+    } 
+  }
+  getnewInventoryID(){
+   
     const oldRecords = localStorage.getItem('Inventory');
     if(oldRecords !== null){
     const Inventory = JSON.parse(oldRecords);
@@ -46,7 +45,7 @@ export class InventoryRegistrationComponent implements OnInit {
     }
 }
   saveInventories(){
-   debugger;
+   
    const latestId = this.getnewInventoryID();
    this.Inventoryobj.id = latestId;
    const oldRecords = localStorage.getItem('Inventory');

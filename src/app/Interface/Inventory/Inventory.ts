@@ -4,5 +4,4 @@ export class Inventoryobj {
     categoryId? : number;
     Quantity? : number;
     dateofPurchase? : number;
-
 }
