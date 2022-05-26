@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl,Validator, Validators } from '@angular/forms';
+import { FormGroup,FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Category } from '../Interface/Inventory/Category';
-import { Router, ActivatedRoute } from '@angular/router';
+
 
 
 @Component({
@@ -11,29 +11,54 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class CategoryComponent implements OnInit {
 
+  form !: FormGroup
+  Submitted = false;
+  public Records : any;
+  Category: Category ;
 
-  form : any
-
-  constructor(
-    private router :Router,
-    private route : ActivatedRoute
-  ){
+  constructor( )
+  {
+    this.Category = new Category(); 
      this.form = new FormGroup(
        {
+          id : new FormControl  (" ",Validators.required ),
+
           Category : new FormControl (" ",Validators.required ),
+
      }
      )
   }
  ngOnInit(){
+  this.getnewCategoryID();
+ }
+ 
    
- }
- saveCategory(){
-   let data: String =this.form.value;
-   console.log(data);
-   return;
-   localStorage.setItem('Categories', JSON.stringify(data));
-  //  this.router.navigate(['./inventory-registration'],{
-  //    queryParams :{data:JSON.stringify(data)}
-  //  });
- }
+ 
+ getnewCategoryID() : any {
+  
+  this.Records = localStorage.getItem('Category');
+  if(this.Records !== null){
+  const Category = JSON.parse(this.Records);
+  return Category.maxlength = 2;
+  }
+ 
 }
+
+saveCategories(){
+ 
+  const latestId = this.getnewCategoryID();
+  this.Category.id = latestId;
+  const Records = localStorage.getItem('Category');
+ if(Records !== null){
+  const Category = JSON.parse(Records);
+  Category.push(this.Category);
+  localStorage.setItem('Category', JSON.stringify(Category));
+}
+else{
+  const CategoryArr = [];
+  CategoryArr.push(this.Category);
+  localStorage.setItem('Category', JSON.stringify(CategoryArr));
+
+}
+
+}}

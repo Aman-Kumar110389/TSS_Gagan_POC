@@ -18,8 +18,8 @@
                 <label for="Category">Category:</label>
                 
                 <select class="form-control" [(ngModel)]="Inventoryobj.categoryId" placeholder="Select Category" name="Category" required="true">
-                  <option *ngFor="let category of categories" [value]="category.id">
-                    {{category.categoryName}}
+                  <option *ngFor="let category of categories;"  [value]="category.id">
+                    {{category.categoryName }}
                   </option>                
               
                 </select>
