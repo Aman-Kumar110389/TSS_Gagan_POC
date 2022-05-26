@@ -13,8 +13,8 @@ export class CategoryComponent implements OnInit {
 
   form !: FormGroup
   Submitted = false;
-  public Records : any;
   Category: Category ;
+  storedCategories: Category[]=[];
   
   constructor( )
   {
@@ -28,37 +28,22 @@ export class CategoryComponent implements OnInit {
      }
      )
   }
+
  ngOnInit(){
-  this.getnewCategoryID();
+ var ls = localStorage.getItem('Category');
+  if(ls !== null || ls!=undefined){
+    this.storedCategories=JSON.parse(ls);    
+     }
  }
- 
-   
- 
- getnewCategoryID() : any {
-  
-  this.Records = localStorage.getItem('Category');
-  if(this.Records !== null){
-  const Category = JSON.parse(this.Records);
-  return Category.length + 1 ;
-  }
- 
-}
 
 saveCategories(){
- 
-  const latestId = this.getnewCategoryID();
-  this.Category.id = latestId;
-  const Records = localStorage.getItem('Category');
- if(Records !== null){
-  const Category = JSON.parse(Records);
-  Category.push(this.Category);
-  localStorage.setItem('Category', JSON.stringify(Category));
+  if(this.storedCategories.length>=5){
+     alert('max 5 allowed');
+    return; 
+  }
+  this.Category.id = this.storedCategories.length+1;
+  this.storedCategories.push(this.Category);
+   localStorage.setItem('Category', JSON.stringify(this.storedCategories));
+   this.Category=new Category();
 }
-else{
-  const CategoryArr = [];
-  CategoryArr.push(this.Category);
-  localStorage.setItem('Category', JSON.stringify(CategoryArr));
-
 }
-
-}}
