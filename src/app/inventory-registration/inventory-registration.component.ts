@@ -29,8 +29,6 @@ export class InventoryRegistrationComponent implements OnInit {
     if(localStorageCategories!=null){
       let category = JSON.parse(localStorageCategories);
       this.categories = category;
-      
-      
     } 
   }
   getnewInventoryID(){
