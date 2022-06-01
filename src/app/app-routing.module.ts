@@ -13,10 +13,14 @@ const routes: Routes = [
   {
     path:'inventory-list',
     component:InventoryListComponent
-  },
+  },  
   {
   path:'Category',
    component:CategoryComponent
+  },
+  {
+    path:"",
+    redirectTo:"inventory-list", pathMatch:"full"
   }
   ];
 

@@ -10,6 +10,7 @@ import { CategoryComponent } from './category/category.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +21,7 @@ import { CategoryComponent } from './category/category.component';
   imports: [
     BrowserModule,
     FormsModule,
+    
     AppRoutingModule
   ],
   providers: [],

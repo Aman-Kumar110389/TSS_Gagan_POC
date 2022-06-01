@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup,FormControl, Validators,} from '@angular/forms';
 import { Category } from '../Interface/Inventory/Category';
-
 
 
 @Component({
@@ -10,23 +9,24 @@ import { Category } from '../Interface/Inventory/Category';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
-
+  
   form !: FormGroup
-  Submitted = false;
   Category: Category ;
   storedCategories: Category[]=[];
-  
-  constructor( )
+
+  constructor()
   {
+   
     this.Category = new Category(); 
-     this.form = new FormGroup(
+     this.form = new FormGroup
+     (
        {
-          id : new FormControl  (" ",Validators.required ),
-
-          Category : new FormControl (" ",Validators.required ),
-
-     }
+         
+          Category : new FormControl (" ",Validators.required  ),
+     
+        }
      )
+     
   }
 
  ngOnInit(){
@@ -35,6 +35,7 @@ export class CategoryComponent implements OnInit {
     this.storedCategories=JSON.parse(ls);    
      }
  }
+
 
 saveCategories(){
   if(this.storedCategories.length>=5){

@@ -9,6 +9,7 @@ import { Inventoryobj} from '../Interface/Inventory/Inventory';
   templateUrl: './inventory-registration.component.html',
   styleUrls: ['./inventory-registration.component.css']
 })
+
 export class InventoryRegistrationComponent implements OnInit {
 
   public Records : any;
@@ -24,13 +25,15 @@ export class InventoryRegistrationComponent implements OnInit {
   }
      
   ngOnInit(): void {
-    debugger;
+   
     var localStorageCategories = localStorage.getItem('Category');
     if(localStorageCategories!=null){
       let category = JSON.parse(localStorageCategories);
       this.categories = category;
     } 
   }
+
+
   getnewInventoryID(){
    
     const oldRecords = localStorage.getItem('Inventory');
