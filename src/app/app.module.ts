@@ -5,8 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InventoryRegistrationComponent } from './inventory-registration/inventory-registration.component';
 import { InventoryListComponent } from './inventory-list/inventory-list.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryComponent } from './category/category.component';
+
 
 
 
@@ -20,6 +21,7 @@ import { CategoryComponent } from './category/category.component';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [],

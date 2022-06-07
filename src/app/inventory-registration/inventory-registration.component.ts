@@ -1,7 +1,7 @@
-import { SlicePipe } from '@angular/common';
-import { Component, createNgModuleRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Category } from '../Interface/Inventory/Category';
 import { Inventoryobj} from '../Interface/Inventory/Inventory';
+import { FormGroup,FormControl, Validators,} from '@angular/forms';
 
 
 @Component({
@@ -9,10 +9,16 @@ import { Inventoryobj} from '../Interface/Inventory/Inventory';
   templateUrl: './inventory-registration.component.html',
   styleUrls: ['./inventory-registration.component.css']
 })
+
 export class InventoryRegistrationComponent implements OnInit {
+ 
+ inventoryForm = new FormGroup({
+  Name : new FormControl ("", [Validators.required]),
+  Quantity : new FormControl ("", [Validators.required]),
+  dateofPurchase : new FormControl ("", [Validators.required]),
+  });
 
   public Records : any;
-  data : any;
   Inventoryobj: Inventoryobj;
   category: any;
   categories : Category[]=[];
@@ -24,13 +30,14 @@ export class InventoryRegistrationComponent implements OnInit {
   }
      
   ngOnInit(): void {
-    debugger;
+   
     var localStorageCategories = localStorage.getItem('Category');
     if(localStorageCategories!=null){
       let category = JSON.parse(localStorageCategories);
       this.categories = category;
     } 
   }
+
   getnewInventoryID(){
    
     const oldRecords = localStorage.getItem('Inventory');
@@ -42,8 +49,10 @@ export class InventoryRegistrationComponent implements OnInit {
       return 1;
     }
 }
+
   saveInventories(){
-   
+  
+  
    const latestId = this.getnewInventoryID();
    this.Inventoryobj.id = latestId;
    const oldRecords = localStorage.getItem('Inventory');
@@ -60,9 +69,5 @@ export class InventoryRegistrationComponent implements OnInit {
   }
   } 
 
-  getnewCategoryID(){
-    
-    
-}
 
 }

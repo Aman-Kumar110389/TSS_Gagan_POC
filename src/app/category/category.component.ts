@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup,FormControl, Validators,} from '@angular/forms';
 import { Category } from '../Interface/Inventory/Category';
-
 
 
 @Component({
@@ -10,55 +9,59 @@ import { Category } from '../Interface/Inventory/Category';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
-
-  form !: FormGroup
-  Submitted = false;
-  public Records : any;
-  Category: Category ;
   
-  constructor( )
+  categoryName = new FormControl ("", [Validators.required]);
+  category: Category ;
+  storedCategories: Category[]=[];
+  
+
+  constructor()
   {
-    this.Category = new Category(); 
-     this.form = new FormGroup(
-       {
-          id : new FormControl  (" ",Validators.required ),
-
-          Category : new FormControl (" ",Validators.required ),
-
-     }
-     )
+    this.category = new Category(); 
   }
+
  ngOnInit(){
-  this.getnewCategoryID();
+ var ls = localStorage.getItem('Category');
+  if(ls !== null || ls!=undefined){
+    this.storedCategories=JSON.parse(ls);    
+     }
  }
  
-   
- 
- getnewCategoryID() : any {
-  
-  this.Records = localStorage.getItem('Category');
-  if(this.Records !== null){
-  const Category = JSON.parse(this.Records);
-  return Category.length + 1 ;
-  }
- 
-}
-
 saveCategories(){
+  if(!this.categoryName.hasError('required') ){
+  if(this.storedCategories.length>=5){
+     alert('max 5 allowed');
+    return; 
+  } 
+  let category = this.storedCategories.find(x => x.categoryName?.toLowerCase()== this.categoryName.value.trim().toLowerCase());
+ if(category == undefined || category == null)  {
+  this.storedCategories.push({ 
+    id : this.storedCategories.length+1,
+    categoryName : this.categoryName.value.trim()});
+     localStorage.setItem('Category', JSON.stringify(this.storedCategories));
+    // this.categoryName.value.setItem(''); //   
+ }
+ else
+ {
+   alert("duplicate entry");
+ }
  
-  const latestId = this.getnewCategoryID();
-  this.Category.id = latestId;
-  const Records = localStorage.getItem('Category');
- if(Records !== null){
-  const Category = JSON.parse(Records);
-  Category.push(this.Category);
-  localStorage.setItem('Category', JSON.stringify(Category));
+
+  
+/*  let checkExists: boolean = false;
+  for (var i = 0; i < this.storedCategories.length; i++) 
+{
+  debugger 
+  if (this.categoryName.value.trim() == this.storedCategories[i].categoryName?.trim()){
+    checkExists = true;
+  }
 }
-else{
-  const CategoryArr = [];
-  CategoryArr.push(this.Category);
-  localStorage.setItem('Category', JSON.stringify(CategoryArr));
+  if (checkExists == false) */{
+ 
+   
+     }  
+   }
+ }
+
 
 }
-
-}}
