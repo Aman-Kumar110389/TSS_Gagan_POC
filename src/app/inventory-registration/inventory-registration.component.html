@@ -1,40 +1,49 @@
-<div class="card">
-  <div class="card-header">inventory Registration       <b>Maximum 10 inventories are allowed. </b></div>
-     <div class="card-body">
-        <div class="container">
-          <form action="/action_page.php" class="was-validated">
-                    
-                   
-              <div class="col-xs-8">
-                <label for="name">Name:</label>
-                <input type="text" class="form-control"  [(ngModel)]="Inventoryobj.Name" placeholder="Enter name" name="name" required="true">
-                <div class="invalid-feedback">Please fill out this field.</div>              
+
+            <form [formgroup]="inventoryForm">       
+               <div class="form-group">
+                <div class ="col-md-4 mb-3">
+                <label for="Name">Name:</label>
+                <input type="text" class="form-control"  formControlName="Name" placeholder="Enter name"  id="Name" name="Name" required>              
+                <span *ngIf = "Name.invalid && (Name.dirty || Name.touched)" class ="alert-danger">Enter your name</span>
               </div>
-             <div class="col-xs-8">
-                <label for="Category">Category:</label>
-                
-                <select class="form-control" [(ngModel)]="Inventoryobj.categoryId" name="Category" required="true">
-                  <option   [ngValue]="null">Select</option>
+              </div>
+
+
+              <div class="form-group">
+               <div class ="col-md-4 mb-3">
+                <label for="Category">Category:</label> 
+                <select class="custom-select" [(ngModel)]="Inventoryobj.categoryId" id="Category" name="Category" required>
+                  <option selected> choose</option>
+ 
                   <option *ngFor="let category of categories;" [value]="category.id">
                     {{category.categoryName }}
-                  </option>                
-                                 
+                  </option>                              
                 </select>
-                <div class="invalid-feedback">Please select a Category</div>
-                </div>
-              <div class="col-xs-8">
+              <br><br>
+                     
+
+              <div class="form-group">
+                <div class ="col-md-15 mb-3">
                 <label for="Quantity">Quantity:</label>
-                <input type="text" class="form-control" [(ngModel)]="Inventoryobj.Quantity" placeholder="Enter Quantity" name="Quantity" required>
-                <div class="invalid-feedback">Enter Quantity</div>
+                <div class="input-group mb-8">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Kg</div>
+                  </div>
+                <input type="number" class="form-control" [formControl]="Quantity" placeholder="Enter Quantity" id="Quantity" name="Quantity" required>
+           <br>
+               <span *ngIf ="Quantity.invalid && (Quantity.dirty || Quantity.touched)" class ="alert-danger" >Enter quantity</span>
+                </div>
               </div>
-              <div class="col-xs-8">  
-                <label for="Dateofpurchase">Date:</label>
-                <input type="date" class="form-control" [(ngModel)]="Inventoryobj.dateofPurchase" placeholder="Enter Date" name="Date" required="true">
-                <div class="invalid-feedback">Enter Date </div>
+              <div  class="form-group">  
+                <div class ="col-md-15 mb-3">
+                <label for="dateofPurchase">Date:</label>
+                <input type="date" class="form-control" formControlName="dateofPurchase" placeholder="Enter Date" id="dateofPurchase" name="dateofPurchase" required>
+                <span *ngIf = "dateofPurchase.invalid && (dateofPurchase.dirty || dateofPurchase.touched)" class ="alert-danger"> Enter date</span>
+                <br>
               </div>
-              <br> <br> 
+              </div>
+            </div>
               <button type="submit" (click)="saveInventories()" class="btn btn-success">Submit</button>
-            </form>
-         </div>
-    </div>
-</div>
+           
+       
+

@@ -10,23 +10,14 @@ import { Category } from '../Interface/Inventory/Category';
 })
 export class CategoryComponent implements OnInit {
   
-  form !: FormGroup
-  Category: Category ;
+  categoryName = new FormControl ("", [Validators.required]);
+  category: Category ;
   storedCategories: Category[]=[];
+  
 
   constructor()
   {
-   
-    this.Category = new Category(); 
-     this.form = new FormGroup
-     (
-       {
-         
-          Category : new FormControl (" ",Validators.required  ),
-     
-        }
-     )
-     
+    this.category = new Category(); 
   }
 
  ngOnInit(){
@@ -35,16 +26,42 @@ export class CategoryComponent implements OnInit {
     this.storedCategories=JSON.parse(ls);    
      }
  }
-
-
+ 
 saveCategories(){
+  if(!this.categoryName.hasError('required') ){
   if(this.storedCategories.length>=5){
      alert('max 5 allowed');
     return; 
+  } 
+  let category = this.storedCategories.find(x => x.categoryName?.toLowerCase()== this.categoryName.value.trim().toLowerCase());
+ if(category == undefined || category == null)  {
+  this.storedCategories.push({ 
+    id : this.storedCategories.length+1,
+    categoryName : this.categoryName.value.trim()});
+     localStorage.setItem('Category', JSON.stringify(this.storedCategories));
+    // this.categoryName.value.setItem(''); //   
+ }
+ else
+ {
+   alert("duplicate entry");
+ }
+ 
+
+  
+/*  let checkExists: boolean = false;
+  for (var i = 0; i < this.storedCategories.length; i++) 
+{
+  debugger 
+  if (this.categoryName.value.trim() == this.storedCategories[i].categoryName?.trim()){
+    checkExists = true;
   }
-  this.Category.id = this.storedCategories.length+1;
-  this.storedCategories.push(this.Category);
-   localStorage.setItem('Category', JSON.stringify(this.storedCategories));
-   this.Category=new Category();
 }
+  if (checkExists == false) */{
+ 
+   
+     }  
+   }
+ }
+
+
 }
