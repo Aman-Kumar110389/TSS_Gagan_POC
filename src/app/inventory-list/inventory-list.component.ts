@@ -16,7 +16,8 @@ export class InventoryListComponent implements OnInit {
   ngOnInit(): void {
    const records = localStorage.getItem('Inventory');
    if (records !== null){
-      this.Inventory =JSON.parse(records);
+      this.Inventory = JSON.parse(records);
+      
    }
 
   }

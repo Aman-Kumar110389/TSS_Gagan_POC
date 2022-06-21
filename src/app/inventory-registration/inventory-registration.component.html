@@ -1,49 +1,47 @@
 
-            <form [formgroup]="inventoryForm">       
+
+
+<h1> Inventory Registration</h1>
+
+<br>
+<form [formGroup] ="inventoryForm">
                <div class="form-group">
                 <div class ="col-md-4 mb-3">
-                <label for="Name">Name:</label>
-                <input type="text" class="form-control"  formControlName="Name" placeholder="Enter name"  id="Name" name="Name" required>              
-                <span *ngIf = "Name.invalid && (Name.dirty || Name.touched)" class ="alert-danger">Enter your name</span>
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" formControlName="name" placeholder="Enter name"  id="name" name="name" required>              
+                <span *ngIf = "inventoryFormControl.name.invalid && (inventoryFormControl.name.dirty || inventoryFormControl.name.touched)" class ="alert-danger">Enter your name</span>
               </div>
               </div>
-
-
               <div class="form-group">
                <div class ="col-md-4 mb-3">
                 <label for="Category">Category:</label> 
-                <select class="custom-select" [(ngModel)]="Inventoryobj.categoryId" id="Category" name="Category" required>
-                  <option selected> choose</option>
- 
-                  <option *ngFor="let category of categories;" [value]="category.id">
+                <select class="custom-select" formControlName="categoryId" id="Category" name="Category" required>
+                  <option selected>Select</option>
+                  <option *ngFor="let category of categories" [value]="category.categoryName">
                     {{category.categoryName }}
                   </option>                              
                 </select>
-              <br><br>
-                     
-
+               </div>
+              </div>
               <div class="form-group">
-                <div class ="col-md-15 mb-3">
-                <label for="Quantity">Quantity:</label>
+                <div class ="col-md-4 mb-3">
+                <label for="quantity">Quantity:</label>
                 <div class="input-group mb-8">
                   <div class="input-group-prepend">
                     <div class="input-group-text">Kg</div>
                   </div>
-                <input type="number" class="form-control" [formControl]="Quantity" placeholder="Enter Quantity" id="Quantity" name="Quantity" required>
-           <br>
-               <span *ngIf ="Quantity.invalid && (Quantity.dirty || Quantity.touched)" class ="alert-danger" >Enter quantity</span>
+                <input type="number" class="form-control" formControlName="quantity" placeholder="Enter Quantity" id="quantity" name="quantity" required>
+                <br>
+               <span *ngIf ="inventoryFormControl.quantity.invalid && (inventoryFormControl.quantity.dirty || inventoryFormControl.quantity.touched)" class ="alert-danger" >Enter quantity</span>
                 </div>
-              </div>
-              <div  class="form-group">  
-                <div class ="col-md-15 mb-3">
+               </div>
+               </div>
+               <div  class="form-group">  
+                <div class ="col-md-4 mb-3">
                 <label for="dateofPurchase">Date:</label>
                 <input type="date" class="form-control" formControlName="dateofPurchase" placeholder="Enter Date" id="dateofPurchase" name="dateofPurchase" required>
-                <span *ngIf = "dateofPurchase.invalid && (dateofPurchase.dirty || dateofPurchase.touched)" class ="alert-danger"> Enter date</span>
-                <br>
-              </div>
-              </div>
-            </div>
-              <button type="submit" (click)="saveInventories()" class="btn btn-success">Submit</button>
-           
-       
-
+                <span *ngIf = "inventoryFormControl.dateofPurchase.invalid && (inventoryFormControl.dateofPurchase.dirty || inventoryFormControl.dateofPurchase.touched)" class ="alert-danger"> Enter date</span>                
+               </div>
+               </div>           
+               <button type="submit" (click)="saveInventories()" class="btn btn-success">Submit</button>
+       </form>    

@@ -1,8 +1,8 @@
 export class Inventoryobj {
     id? : number;
-    Name? : string;
+    name? : string;
     categoryId? : string;
-    Quantity? : number;
+    quantity? : number;
     dateofPurchase? : number;
  
 }

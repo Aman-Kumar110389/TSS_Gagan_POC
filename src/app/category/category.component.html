@@ -4,11 +4,32 @@
        
         <div class="form-group">
         <label for="Category">Category Name</label>
-      <input type="text" class="form-control" id="categoryName"   placeholder="Enter Category" name="categoryName" [formControl]="categoryName" required>          
+      <input type="text" class="form-control" id="categoryName" placeholder="Enter Category" name="categoryName" [formControl]="categoryName" required>          
      
        <span *ngIf = "categoryName.invalid && (categoryName.dirty || categoryName.touched)" class ="alert-danger">Please select a category</span>
      <br>
       <button type="submit" (click)="saveCategories()" class="btn btn-success">Submit</button>
     </div>
-  
-   
+</div>
+
+<div class = "col-md-4 mt-4 mb-4">
+   <table class="table table-bordered">
+     <thead>
+       <tr>
+         <th>
+           Category Name
+         </th>
+       </tr>
+     </thead>
+     <tbody>
+      <tr *ngFor ="let user of storedCategories; let i = index">
+      <td>
+          {{user.categoryName}}            
+         </td>
+       <td>
+        <button type="button" class ="btn btn-success" (click)="editCategory(i)"> Edit </button> &nbsp;
+        <button type="button" class ="btn btn-info" (click)="deleteCategory(i)"> Delete </button>           
+      </td>
+    </tr>
+     </tbody>
+    </table>

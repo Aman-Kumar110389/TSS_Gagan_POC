@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../Interface/Inventory/Category';
 import { Inventoryobj} from '../Interface/Inventory/Inventory';
-import { FormGroup,FormControl, Validators,} from '@angular/forms';
+import { FormBuilder,FormControl ,FormGroup ,Validators,} from '@angular/forms';
 
 
 @Component({
@@ -13,33 +13,28 @@ import { FormGroup,FormControl, Validators,} from '@angular/forms';
 export class InventoryRegistrationComponent implements OnInit {
  
  inventoryForm = new FormGroup({
-  Name : new FormControl ("", [Validators.required]),
-  Quantity : new FormControl ("", [Validators.required]),
+  name : new FormControl ("", [Validators.required]),
+  quantity : new FormControl ("", [Validators.required]),
   dateofPurchase : new FormControl ("", [Validators.required]),
+  categoryId : new FormControl ("", [Validators.required]),
   });
 
   public Records : any;
-  Inventoryobj: Inventoryobj;
+  Inventory: Inventoryobj;
   category: any;
   categories : Category[]=[];
   
-  constructor(
-  ) { 
-    this.Inventoryobj = new Inventoryobj();
-
-  }
-     
+  constructor() { 
+    this.Inventory = new Inventoryobj();
+}  
   ngOnInit(): void {
-   
     var localStorageCategories = localStorage.getItem('Category');
     if(localStorageCategories!=null){
       let category = JSON.parse(localStorageCategories);
       this.categories = category;
     } 
   }
-
-  getnewInventoryID(){
-   
+  getnewInventoryID(){   
     const oldRecords = localStorage.getItem('Inventory');
     if(oldRecords !== null){
     const Inventory = JSON.parse(oldRecords);
@@ -49,25 +44,36 @@ export class InventoryRegistrationComponent implements OnInit {
       return 1;
     }
 }
-
-  saveInventories(){
-  
-  
-   const latestId = this.getnewInventoryID();
-   this.Inventoryobj.id = latestId;
+get inventoryFormControl() {
+  return this.inventoryForm.controls;
+}
+  saveInventories(){  
+    debugger;
+    const latestId = this.getnewInventoryID();
+   this.Inventory.id = latestId;
    const oldRecords = localStorage.getItem('Inventory');
    if(oldRecords !== null){
     const Inventory = JSON.parse(oldRecords);
-    Inventory.push(this.Inventoryobj);
+    Inventory.push({
+      id: this.inventoryForm.controls.id,
+      name : this.inventoryForm.controls.name.value,
+      categoryId: this.inventoryForm.controls.categoryId.value,
+      quantity: this.inventoryForm.controls.quantity.value,
+      dateofPurchase: this.inventoryForm.controls.dateofPurchase.value,  
+    });
+    console.log(Inventory);
+    
     localStorage.setItem('Inventory', JSON.stringify(Inventory));
   }
   else{
     const inventoryArr = [];
-    inventoryArr.push(this.Inventoryobj);
+    inventoryArr.push({id: this.Inventory.id,
+    name : this.inventoryForm.controls.name.value,
+    categoryId: this.inventoryForm.controls.categoryId.value,
+    quantity: this.inventoryForm.controls.quantity.value,
+    dateofPurchase: this.inventoryForm.controls.dateofPurchase.value, 
+  });
     localStorage.setItem('Inventory', JSON.stringify(inventoryArr));
-
   }
   } 
-
-
 }
