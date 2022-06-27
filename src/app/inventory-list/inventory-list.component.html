@@ -7,25 +7,19 @@
           <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Category</th>
+                <th>Category Name</th>
                 <th>Quantity</th>
                 <th>Dateofpurchase</th>
               </tr>
             </thead>
             <tbody>
-             <tr *ngFor = "let items of Inventory; let i = index">
+             <tr *ngFor = "let items of inventoryList; let i = index">
              <td>{{i+1}}</td>
              <td>{{items.name}}</td>
-             <td>{{items.categoryId}}</td>
-             <td>{{items.quantity}}</td>
-             <td>{{items.dateofPurchase}}</td>
-            </tr>  
-
-    <div class ="col-md-4 mb-3">
-      <label>Category ID</label>
-      <input type="text" placeholder="Enter Category ID" id="categoryId" name="categoryId" required>                   
-      <button type="submit" (click)="searchCategory()" class="btn btn-success">Submit</button>
-    </div>
+             <td>{{items.categoryName}}</td>
+             <td>{{items.quantity }}</td>
+             <td>{{items.dateofPurchase | date : 'mediumDate'}}</td>
+            </tr>      
   </tbody>
 </table>
   </div>

@@ -6,3 +6,11 @@ export class Inventoryobj {
     dateofPurchase? : number;
  
 }
+
+export class InventoryDetails {
+    id? : number;
+    name? : string;
+    categoryName? : string;
+    quantity? : number;
+    dateofPurchase? : number; 
+}
