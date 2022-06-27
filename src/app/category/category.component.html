@@ -1,17 +1,22 @@
- 
-<div class="container mt-3">
-    <h2>Category Name</h2>
-       
+ <br>
+<div class="col-md-4 mb-3">
+    <h2>Category</h2> 
+
+    <div *ngIf ="alert" class="alert alert-info" role="alert">
+      <button (click)="closeAlert()" type="button" dismiss-on-timeout="2" class="close" data-dismiss="alert" aria-label="Close" >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>Success!</strong> Category name is edited..
+    </div>    
+
         <div class="form-group">
         <label for="Category">Category Name</label>
-      <input type="text" class="form-control" id="categoryName" placeholder="Enter Category" name="categoryName" [formControl]="categoryName" required>          
-     
+      <input type="text" class="form-control" id="categoryName"  placeholder="Enter Category" name="categoryName" [formControl]="categoryName" required>              
        <span *ngIf = "categoryName.invalid && (categoryName.dirty || categoryName.touched)" class ="alert-danger">Please select a category</span>
      <br>
-      <button type="submit" (click)="saveCategories()" class="btn btn-success">Submit</button>
+      <button type="submit" (click)="saveCategories()" [disabled]="categoryName.invalid" class="btn btn-success">Submit</button>
     </div>
 </div>
-
 <div class = "col-md-4 mt-4 mb-4">
    <table class="table table-bordered">
      <thead>
@@ -19,6 +24,9 @@
          <th>
            Category Name
          </th>
+         <th>
+          Actions
+        </th>
        </tr>
      </thead>
      <tbody>
@@ -26,9 +34,9 @@
       <td>
           {{user.categoryName}}            
          </td>
-       <td>
-        <button type="button" class ="btn btn-success" (click)="editCategory(i)"> Edit </button> &nbsp;
-        <button type="button" class ="btn btn-info" (click)="deleteCategory(i)"> Delete </button>           
+        <td>     
+        <button type="button" class="btn btn-success bi bi-pencil" (click)="editCategory(i)"></button> &nbsp;
+        <button type="button" class ="btn btn-danger bi bi-trash-fill" (click)="deleteCategory(i)"></button>               
       </td>
     </tr>
      </tbody>

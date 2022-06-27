@@ -10,8 +10,9 @@ import { Category } from '../Interface/Inventory/Category';
 })
 export class CategoryComponent implements OnInit {
   
+  alert : boolean = false;
   isEdit : any;
-  categoryName = new FormControl ("", [Validators.required]);
+  categoryName = new FormControl ("", [Validators.required, Validators.pattern(".*\\S.*[a-zA-Z]")]);
   category: Category;
   storedCategories: Category[]=[];
   
@@ -41,12 +42,14 @@ saveCategories(){
     this.storedCategories.push({ 
       id: this.storedCategories.length + 1,
       categoryName: this.categoryName.value.trim()
-     });  
+     });   
 }
-     this.categoryName.clearValidators();
-     
-     localStorage.setItem('Category', JSON.stringify(this.storedCategories));
-     this.categoryName.setValue(''); 
+    this.alert = true;
+    this.categoryName.reset();
+    this.categoryName.clearValidators();
+    
+    localStorage.setItem('Category', JSON.stringify(this.storedCategories));
+    this.categoryName.setValue(''); 
  }
  else 
  {
@@ -60,9 +63,19 @@ let item=this.storedCategories[index]
   this.isEdit = index;
 }
 deleteCategory(index : number){
+  let response = confirm("Are you sure to delete this Category");
+  if (response==false)
+{
+     return;
+}
+console.log(response);
      let itemm = this.storedCategories[index]
+    // if(confirm("Are you sure to delete" )) {
+     // console.log("Implement delete functionality here");
+   // }
      this.storedCategories.splice(index, 1);
-   //  this.isEdit = index;
-     // this.storedCategories.slice(index); 
+    }
+    closeAlert(){
+      this.alert = false;
     }
   }

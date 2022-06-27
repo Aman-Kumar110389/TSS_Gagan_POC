@@ -1,9 +1,10 @@
 <div class="card">
-    <div class="card-header">Inventory List</div>
-    <div class="card-body">
+  <br>
+  <h2>Inventory List</h2>
+     <div class="card-body">
         <table class="table table-primary">
-            <thead>
-              <tr>
+          <thead>  
+          <tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Category</th>
@@ -18,8 +19,14 @@
              <td>{{items.categoryId}}</td>
              <td>{{items.quantity}}</td>
              <td>{{items.dateofPurchase}}</td>
-            </tr>
-            </tbody>
-          </table>
-    </div> 
+            </tr>  
+
+    <div class ="col-md-4 mb-3">
+      <label>Category ID</label>
+      <input type="text" placeholder="Enter Category ID" id="categoryId" name="categoryId" required>                   
+      <button type="submit" (click)="searchCategory()" class="btn btn-success">Submit</button>
+    </div>
+  </tbody>
+</table>
   </div>
+</div> 

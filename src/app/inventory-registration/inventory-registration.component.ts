@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../Interface/Inventory/Category';
 import { Inventoryobj} from '../Interface/Inventory/Inventory';
-import { FormBuilder,FormControl ,FormGroup ,Validators,} from '@angular/forms';
+import {FormControl ,FormGroup ,Validators,} from '@angular/forms';
 
 
 @Component({
@@ -12,7 +12,8 @@ import { FormBuilder,FormControl ,FormGroup ,Validators,} from '@angular/forms';
 
 export class InventoryRegistrationComponent implements OnInit {
  
- inventoryForm = new FormGroup({
+  alert : boolean = false;
+  inventoryForm = new FormGroup({
   name : new FormControl ("", [Validators.required]),
   quantity : new FormControl ("", [Validators.required]),
   dateofPurchase : new FormControl ("", [Validators.required]),
@@ -48,7 +49,7 @@ get inventoryFormControl() {
   return this.inventoryForm.controls;
 }
   saveInventories(){  
-    debugger;
+   
     const latestId = this.getnewInventoryID();
    this.Inventory.id = latestId;
    const oldRecords = localStorage.getItem('Inventory');
@@ -61,10 +62,10 @@ get inventoryFormControl() {
       quantity: this.inventoryForm.controls.quantity.value,
       dateofPurchase: this.inventoryForm.controls.dateofPurchase.value,  
     });
-    console.log(Inventory);
-    
+    this.alert = true;
+    this.inventoryForm.reset();
     localStorage.setItem('Inventory', JSON.stringify(Inventory));
-  }
+}
   else{
     const inventoryArr = [];
     inventoryArr.push({id: this.Inventory.id,
@@ -75,5 +76,9 @@ get inventoryFormControl() {
   });
     localStorage.setItem('Inventory', JSON.stringify(inventoryArr));
   }
-  } 
+  }
+  
+  closeAlert(){
+    this.alert = false;
+  }
 }
