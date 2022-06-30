@@ -7,6 +7,7 @@ import { InventoryRegistrationComponent } from './inventory-registration/invento
 import { InventoryListComponent } from './inventory-list/inventory-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryComponent } from './category/category.component';
+import { FirstProviderService } from './first-provider.service';
 
 
 
@@ -24,7 +25,7 @@ import { CategoryComponent } from './category/category.component';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [FirstProviderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

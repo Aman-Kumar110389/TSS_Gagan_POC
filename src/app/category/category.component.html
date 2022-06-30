@@ -6,7 +6,13 @@
         <span aria-hidden="true">&times;</span>
       </button>
       <strong>Success!</strong> Category name is added.
-    </div>    
+    </div>   
+    <div *ngIf ="deAlert" class="alert alert-danger" role="alert">
+      <button (click)="deleteAlert()" type="button"  class="close" data-dismiss="alert" aria-label="Close" >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>Deleted!</strong>
+    </div>   
 
         <div class="form-group">
         <label for="Category">Category Name</label>

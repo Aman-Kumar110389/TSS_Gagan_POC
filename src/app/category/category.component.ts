@@ -10,6 +10,7 @@ import { Category } from '../Interface/Inventory/Category';
 })
 export class CategoryComponent implements OnInit {
   
+  deAlert : boolean = false;
   alert : boolean = false;
   isEdit : any;
   categoryName = new FormControl ("", [Validators.required, Validators.pattern(".*\\S.*[a-zA-Z]")]);
@@ -37,8 +38,9 @@ saveCategories(){
   if(this.isEdit!==undefined){
     this.storedCategories[this.isEdit].categoryName = this.categoryName.value.trim();
     this.isEdit=undefined
-   
-  }else{
+  }
+  else
+  {
     this.storedCategories.push({ 
       id: this.storedCategories.length + 1,
       categoryName: this.categoryName.value.trim()
@@ -62,7 +64,7 @@ let item=this.storedCategories[index]
   this.categoryName.setValue(item.categoryName); 
   this.isEdit = index;
 }
-deleteCategory(index : number){
+deleteCategory(index: any){
   let response = confirm("Are you sure to delete this Category");
   if (response==false)
 {
@@ -70,12 +72,16 @@ deleteCategory(index : number){
 }
 console.log(response);
      let itemm = this.storedCategories[index]
-    // if(confirm("Are you sure to delete" )) {
-     // console.log("Implement delete functionality here");
-   // }
      this.storedCategories.splice(index, 1);
+     localStorage.removeItem(index);
+     this.deAlert = true;
+     localStorage.setItem('Category', JSON.stringify(this.storedCategories));
+     this.categoryName.setValue(''); 
     }
     closeAlert(){
       this.alert = false;
+    }
+    deleteAlert(){
+      this.deAlert = false;
     }
   }
