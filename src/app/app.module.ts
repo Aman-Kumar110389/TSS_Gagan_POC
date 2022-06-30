@@ -7,10 +7,7 @@ import { InventoryRegistrationComponent } from './inventory-registration/invento
 import { InventoryListComponent } from './inventory-list/inventory-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryComponent } from './category/category.component';
-import { FirstProviderService } from './first-provider.service';
-
-
-
+import {InventoryService} from './providers/inventory.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +22,7 @@ import { FirstProviderService } from './first-provider.service';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [FirstProviderService],
+  providers: [InventoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

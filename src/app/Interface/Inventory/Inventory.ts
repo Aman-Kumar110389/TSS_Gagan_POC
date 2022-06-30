@@ -1,16 +1,14 @@
-export class Inventoryobj {
+export abstract class baseInventory{
     id? : number;
     name? : string;
-    categoryId? : string;
     quantity? : number;
     dateofPurchase? : number;
- 
 }
 
-export class InventoryDetails {
-    id? : number;
-    name? : string;
+export class Inventoryobj extends   baseInventory {
+    categoryId? : string;
+}
+
+export class InventoryDetails extends   baseInventory  {
     categoryName? : string;
-    quantity? : number;
-    dateofPurchase? : number; 
 }

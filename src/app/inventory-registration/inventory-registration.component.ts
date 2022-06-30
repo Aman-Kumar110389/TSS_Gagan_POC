@@ -48,8 +48,8 @@ export class InventoryRegistrationComponent implements OnInit {
 get inventoryFormControl() {
   return this.inventoryForm.controls;
 }
-  saveInventories(){  
-   
+
+  saveInventories(){     
     const latestId = this.getnewInventoryID();
    this.Inventory.id = latestId;
    const oldRecords = localStorage.getItem('Inventory');
