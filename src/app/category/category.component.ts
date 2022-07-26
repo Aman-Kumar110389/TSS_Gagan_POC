@@ -46,7 +46,9 @@ saveCategories(){
    alert("duplicate entry");
  }
  
-
+function xyz(){
+  
+}
   
 /*  let checkExists: boolean = false;
   for (var i = 0; i < this.storedCategories.length; i++) 
